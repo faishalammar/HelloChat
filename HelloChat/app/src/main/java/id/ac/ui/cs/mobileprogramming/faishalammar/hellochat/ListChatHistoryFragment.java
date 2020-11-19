@@ -1,110 +1,60 @@
 package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentListChatHistoryBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListChatHistoryFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListChatHistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListChatHistoryFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private FragmentListChatHistoryBinding binding;
+    private ChatDetailsFragment chatDetailsFragment = new ChatDetailsFragment();
 
     public ListChatHistoryFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListChatHistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListChatHistoryFragment newInstance(String param1, String param2) {
-        ListChatHistoryFragment fragment = new ListChatHistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_chat_history, container, false);
-    }
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_chat_history, container, false);
+        return binding.getRoot();
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        List<Message> list = new ArrayList<>();
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+        list.add(new Message("Username User", "pesan terakhir yang perlu dibalas", "Finish lab 4 Mobile Programming Course"));
+        list.add(new Message("Faishal Ammar", "pesan terakhir yang dikirimkan", "Learn more about Playcanvas"));
+        list.add(new Message("John Doe", "pesan terakhir yang perlu dibalas", "Complete Sherlock Holmes Series"));
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
+        binding.recyclerView.setAdapter(adapter);
+
+        adapter.setListener((v, position) -> {
+            viewModel.setSelected(adapter.getItemAt(position));
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.container, chatDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
     }
 }

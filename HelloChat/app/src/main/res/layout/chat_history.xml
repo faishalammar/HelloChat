@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@color/design_default_color_background"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/design_default_color_on_primary"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="02dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="56dp"
+                android:layout_height="58dp"
+
+                android:layout_margin="12dp"
+                app:srcCompat="@mipmap/ic_launcher_round" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    tools:text="Username" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/design_default_color_background"
+                    tools:text="Monday" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>
+

@@ -9,8 +9,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentChatDetailsBinding;
-import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentChatDetailsBinding;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.ChatHistoryBinding;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentListChatHistoryBinding;
+
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -37,9 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        
-        FragmentChatDetailsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_chat_history, parent, false);
+        ChatHistoryBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_history, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -56,9 +55,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private FragmentChatDetailsBinding binding;
+        private ChatHistoryBinding binding;
 
-        public ViewHolder(@NonNull FragmentChatDetailsBinding binding){
+        public ViewHolder(@NonNull ChatHistoryBinding binding){
             super(binding.getRoot());
             this.binding = binding;
             this.binding.getRoot().setOnClickListener(this);
