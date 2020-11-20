@@ -46,7 +46,7 @@
                     tools:text="Username" />
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/lastMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

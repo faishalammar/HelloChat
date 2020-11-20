@@ -21,15 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                // Update Content
-            }
-        });
-
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, listChatHistoryFragment)
                 .addToBackStack("chat_history")

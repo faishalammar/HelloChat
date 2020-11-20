@@ -7,6 +7,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class FriendViewModel extends AndroidViewModel {
     private FriendRepository repository;
@@ -36,6 +37,14 @@ public class FriendViewModel extends AndroidViewModel {
 
     public LiveData<List<Friend>> getAllFriends(){
         return allFriends;
+    }
+
+    private MutableLiveData<Friend> selected = new MutableLiveData<>();
+    public void setSelected(Friend friend){
+        selected.setValue(friend);
+    }
+    public MutableLiveData<Friend> getSelected() {
+        return selected;
     }
 
 

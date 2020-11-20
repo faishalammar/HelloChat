@@ -13,7 +13,6 @@ public class Message {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private Date phoneNumber;
     private String message;
 
     @ForeignKey
@@ -35,14 +34,6 @@ public class Message {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Date getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Date phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getMessage() {

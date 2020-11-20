@@ -6,12 +6,15 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentListChatHistoryBinding;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.friend.Friend;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.friend.FriendViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,18 +40,21 @@ public class ListChatHistoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        List<Message> list = new ArrayList<>();
+        FriendViewModel friendViewModel;
+        friendViewModel = new ViewModelProvider(requireActivity()).get(FriendViewModel.class);
 
-        list.add(new Message("Username User", "pesan terakhir yang perlu dibalas", "Finish lab 4 Mobile Programming Course"));
-        list.add(new Message("Faishal Ammar", "pesan terakhir yang dikirimkan", "Learn more about Playcanvas"));
-        list.add(new Message("John Doe", "pesan terakhir yang perlu dibalas", "Complete Sherlock Holmes Series"));
+        ListChatHistoryAdapter adapter = new ListChatHistoryAdapter();
+        binding.listFriendsRecyclerView.setAdapter(adapter);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
-        binding.recyclerView.setAdapter(adapter);
-
+        friendViewModel.getAllFriends().observe(this, new Observer<List<Friend>>() {
+            @Override
+            public void onChanged(@Nullable List<Friend> friends) {
+                adapter.setFriends(friends);
+            }
+        });
+        
         adapter.setListener((v, position) -> {
-            viewModel.setSelected(adapter.getItemAt(position));
+            friendViewModel.setSelected(adapter.getItemAt(position));
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.container, chatDetailsFragment)
                     .addToBackStack(null)

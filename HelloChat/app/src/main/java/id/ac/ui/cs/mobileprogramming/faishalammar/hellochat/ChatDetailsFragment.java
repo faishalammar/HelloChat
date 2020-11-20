@@ -32,11 +32,11 @@ public class ChatDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        viewModel.getSelected().observe(getViewLifecycleOwner(), item -> {
-            binding.date.setText(item.getDate());
-            binding.username.setText(item.getUsername());
-            binding.details.setText(item.getDetails());
-        });
+//        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+//        viewModel.getSelected().observe(getViewLifecycleOwner(), item -> {
+//            binding.date.setText(item.getDate());
+//            binding.username.setText(item.getUsername());
+//            binding.details.setText(item.getDetails());
+//        });
     }
 }
