@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
+package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user;
 
 import android.app.Application;
 import android.os.AsyncTask;

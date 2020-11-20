@@ -49,8 +49,10 @@
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:textColor="@color/design_default_color_background"
-                    tools:text="Monday" />
+                    tools:text="Last Message Replied or Last Message Sent"
+                    />
 
             </LinearLayout>
 

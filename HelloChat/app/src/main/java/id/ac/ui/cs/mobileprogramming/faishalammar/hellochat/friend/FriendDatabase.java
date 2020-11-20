@@ -1,11 +1,7 @@
-package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
+package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.friend;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.PopupMenu;
-
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.util.ConcurrentModificationException;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -13,16 +9,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class}, version = 1)
-public abstract class UserDatabase extends RoomDatabase {
+@Database(entities = {Friend.class}, version = 1)
+public abstract class FriendDatabase extends RoomDatabase {
 
-    private static UserDatabase instance;
-    public abstract UserDao userDao();
+    private static FriendDatabase instance;
+    public abstract FriendDao friendDao();
 
-    public static synchronized UserDatabase getInstance(Context context){
+    public static synchronized FriendDatabase getInstance(Context context){
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    UserDatabase.class, "user_database")
+                    FriendDatabase.class, "user_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
@@ -30,7 +26,7 @@ public abstract class UserDatabase extends RoomDatabase {
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+    private static Callback roomCallback = new Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -39,17 +35,17 @@ public abstract class UserDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-        private UserDao userDao;
+        private FriendDao friendDao;
 
-        private PopulateDbAsyncTask(UserDatabase db){
-            userDao = db.userDao();
+        private PopulateDbAsyncTask(FriendDatabase db){
+            friendDao = db.friendDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userDao.insert(new User("faishal-ammar", 8787812));
-            userDao.insert(new User("username-user", 8787812));
-            userDao.insert(new User("user-empat", 8787812));
+            friendDao.insert(new Friend("faishal-ammar", 8787812));
+            friendDao.insert(new Friend("username-user", 8787812));
+            friendDao.insert(new Friend("user-empat", 8787812));
             return null;
         }
     }

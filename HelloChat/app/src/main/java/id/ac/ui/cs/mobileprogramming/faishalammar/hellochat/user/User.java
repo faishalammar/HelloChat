@@ -1,9 +1,9 @@
-package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
+package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "user_table")
+@Entity(tableName = "friend_table")
 public class User {
 
     @PrimaryKey(autoGenerate = true)

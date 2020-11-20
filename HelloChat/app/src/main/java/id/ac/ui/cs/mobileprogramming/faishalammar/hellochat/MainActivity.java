@@ -6,8 +6,9 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user.User;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user.UserViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
