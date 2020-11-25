@@ -7,6 +7,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.message.Message;
 
 public class UserViewModel extends AndroidViewModel {
     private UserRepository repository;
@@ -37,6 +38,9 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<List<User>> getAllUsers(){
         return allUsers;
     }
+
+    public LiveData<List<Message>> getAllMessageWithReceiverId(int id){ return repository.getAllMessageReceived(id);}
+    public LiveData<List<Message>> getAllMessageWithSenderId(int id){ return repository.getAllMessageSent(id);}
 
 
 }

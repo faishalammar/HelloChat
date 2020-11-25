@@ -27,6 +27,11 @@ public class Message {
                     childColumns = "userReceiverId")
     private Integer userReceiverId;
 
+    public Message(String message, Integer userSenderId, Integer userReceiverId) {
+        this.message = message;
+        this.userSenderId = userSenderId;
+        this.userReceiverId = userReceiverId;
+    }
 
     public int getId() {
         return id;

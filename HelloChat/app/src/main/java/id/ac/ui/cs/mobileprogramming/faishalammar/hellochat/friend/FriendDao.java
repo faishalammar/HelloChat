@@ -8,6 +8,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.message.Message;
 
 @Dao
 public interface FriendDao {
@@ -26,4 +27,7 @@ public interface FriendDao {
 
     @Query("SELECT * FROM friend_table")
     LiveData<List<Friend>> getAllFriend();
+
+
+
 }

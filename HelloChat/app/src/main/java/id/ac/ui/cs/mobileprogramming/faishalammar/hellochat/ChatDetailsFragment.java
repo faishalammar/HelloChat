@@ -1,26 +1,49 @@
 package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
 
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.databinding.FragmentChatDetailsBinding;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.friend.FriendViewModel;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.message.Message;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.message.MessageViewModel;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user.UserViewModel;
 
 
 public class ChatDetailsFragment extends Fragment {
 
     private FragmentChatDetailsBinding binding;
 
+    List<Message> listMessageReceived;
+    int friendSelectedId = 0;
+
     public ChatDetailsFragment() {
     }
 
+    public void setFriendSelectedId(int friendSelectedId) {
+        this.friendSelectedId = friendSelectedId;
+    }
+
+    public int getFriendSelectedId() {
+        return friendSelectedId;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,11 +55,35 @@ public class ChatDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-//        viewModel.getSelected().observe(getViewLifecycleOwner(), item -> {
-//            binding.date.setText(item.getDate());
-//            binding.username.setText(item.getUsername());
-//            binding.details.setText(item.getDetails());
-//        });
+        FriendViewModel friendViewModel;
+        MessageViewModel messageViewModel;
+        UserViewModel userViewModel;
+
+        friendViewModel = new ViewModelProvider(requireActivity()).get(FriendViewModel.class);
+        messageViewModel = new ViewModelProvider(requireActivity()).get(MessageViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+
+        ChatDetailsAdapter adapter = new ChatDetailsAdapter();
+        binding.listMessageRecyclerView.setAdapter(adapter);
+
+        friendViewModel.getSelected().observe(getViewLifecycleOwner(), friendSelected -> {
+            setFriendSelectedId(friendSelected.getId());
+            binding.username.setText(friendSelected.getUsername());
+            adapter.setFriendSelectedId(friendSelected);
+            adapter.setMessages(listMessageReceived);
+        });
+
+        messageViewModel.getAllMessages().observe(this, new Observer<List<Message>>() {
+            @Override
+            public void onChanged(@Nullable List<Message> listMessage) {
+                listMessageReceived = listMessage;
+                adapter.setMessages(listMessage);
+            }
+        });
+
+
     }
+
+
 }

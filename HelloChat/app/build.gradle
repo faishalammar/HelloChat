@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            resValue("string", "PORT_NUMBER", "8081")
+            resValue("string", "PORT_NUMBER", "8888")
         }
     }
     dataBinding {

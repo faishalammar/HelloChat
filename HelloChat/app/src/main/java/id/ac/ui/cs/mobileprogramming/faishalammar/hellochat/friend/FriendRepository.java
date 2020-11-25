@@ -6,13 +6,14 @@ import android.os.AsyncTask;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.HelloChatDatabase;
 
 public class FriendRepository {
     private FriendDao friendDao;
     private LiveData<List<Friend>> allFriends;
 
     public FriendRepository(Application application) {
-        FriendDatabase database = FriendDatabase.getInstance(application);
+        HelloChatDatabase database = HelloChatDatabase.getInstance(application);
         friendDao = database.friendDao();
         allFriends = friendDao.getAllFriend();
     }

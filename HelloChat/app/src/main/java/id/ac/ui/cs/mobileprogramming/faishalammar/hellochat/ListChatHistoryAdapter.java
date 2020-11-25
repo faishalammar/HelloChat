@@ -31,8 +31,6 @@ public class ListChatHistoryAdapter extends RecyclerView.Adapter<ListChatHistory
     public void onBindViewHolder(@NonNull FriendsHolder holder, int position){
         holder.binding.lastMessage.setText(String.valueOf(listFriends.get(position).getPhoneNumber()));
         holder.binding.username.setText(listFriends.get(position).getUsername());
-//        holder.binding.lastMessage.setText(listFriends.get(position).getMessageId());
-//        holder.binding.username.setText(listFriends.get(position).getUsername());
     }
 
     @Override

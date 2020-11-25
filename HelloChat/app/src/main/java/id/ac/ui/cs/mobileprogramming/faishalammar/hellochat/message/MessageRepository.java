@@ -6,13 +6,14 @@ import android.os.AsyncTask;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.HelloChatDatabase;
 
 public class MessageRepository {
     private MessageDao messageDao;
     private LiveData<List<Message>> allMessages;
 
     public MessageRepository(Application application) {
-        MessageDatabase database = MessageDatabase.getInstance(application);
+        HelloChatDatabase database = HelloChatDatabase.getInstance(application);
         messageDao = database.messageDao();
         allMessages = messageDao.getAllMessage();
     }

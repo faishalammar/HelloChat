@@ -2,7 +2,10 @@
     <string name="app_name">HelloChat</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="msgFormPlaceholder">Type your message</string>
+    <string name="chatRoomGreetings">Welcome to HelloChat ChatBox</string>
+    <string name="sendButtonMsg">Send</string>
+    <string name="listContactButtonText">Contact</string>
+    <string name="recentChat">Recent Chat</string>
 
 </resources>

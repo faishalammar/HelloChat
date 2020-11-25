@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HelloChat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="msgFormPlaceholder">Masukan Pesan</string>
+    <string name="chatRoomGreetings">Selamat Datang di HelloChat</string>
+    <string name="sendButtonMsg">Kirim</string>
+    <string name="listContactButtonText">Kontak</string>
+    <string name="recentChat">Riwayat Pesan</string>
+
+</resources>
