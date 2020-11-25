@@ -28,6 +28,5 @@ public interface FriendDao {
     @Query("SELECT * FROM friend_table")
     LiveData<List<Friend>> getAllFriend();
 
-
-
 }
+

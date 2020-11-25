@@ -51,23 +51,14 @@ public abstract class HelloChatDatabase extends RoomDatabase {
         private MessageDao messageDao;
         private UserDao userDao;
 
-
-
         private PopulateDbAsyncTask(HelloChatDatabase db){
             friendDao = db.friendDao();
             messageDao = db.messageDao();
             userDao = db.userDao();
         }
 
-
         @Override
         protected Void doInBackground(Void... voids) {
-
-            String[] listContact = { ContactsContract.Contacts.DISPLAY_NAME,
-                    ContactsContract.Contacts.PHOTO_URI };
-
-            Log.d("List Contact", listContact[0]);
-
             friendDao.insert(new Friend(Long.valueOf(8786), "faishalammar"));
             friendDao.insert(new Friend(Long.valueOf(8486), "username123"));
             friendDao.insert(new Friend(Long.valueOf(5786), "new user"));
@@ -95,3 +86,5 @@ public abstract class HelloChatDatabase extends RoomDatabase {
     }
 
 }
+
+

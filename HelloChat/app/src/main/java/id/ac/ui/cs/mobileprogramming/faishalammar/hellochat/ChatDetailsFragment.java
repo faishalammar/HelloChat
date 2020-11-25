@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,8 +83,34 @@ public class ChatDetailsFragment extends Fragment {
             }
         });
 
+        binding.sendButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String message = binding.editText.getText().toString();
+                        Message newMessage = new Message(message, 4, getFriendSelectedId());
+                        messageViewModel.insert(newMessage);
+
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // echo message replied
+                                Message repliedMessage = new Message(message, getFriendSelectedId(), 4);
+                                messageViewModel.insert(repliedMessage);
+                                messageViewModel.insert(repliedMessage);
+                            }
+                        }, 5000);
+
+
+
+                    }
+                }
+        );
 
     }
+
+
 
 
 }

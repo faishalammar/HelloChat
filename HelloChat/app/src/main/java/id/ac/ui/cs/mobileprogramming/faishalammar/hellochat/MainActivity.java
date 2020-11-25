@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        if(isTablet(getApplicationContext())){
+        if(isLandscape(getApplicationContext())){
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, listChatHistoryFragment)
                     .addToBackStack(null)
@@ -59,10 +59,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    public static boolean isLandscape(Context context) {
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+
+
+    public static boolean isPhoneAndLandscape(Context context){
+        int screenLayout = context.getResources().getConfiguration().screenLayout;
+        int screenOrientation = context.getResources().getConfiguration().orientation;
+
+        return (screenLayout >= Configuration.SCREENLAYOUT_SIZE_SMALL & 
+                screenLayout <= Configuration.SCREENLAYOUT_SIZE_LARGE & 
+                screenOrientation == Configuration.ORIENTATION_LANDSCAPE);
+            
     }
 
 }

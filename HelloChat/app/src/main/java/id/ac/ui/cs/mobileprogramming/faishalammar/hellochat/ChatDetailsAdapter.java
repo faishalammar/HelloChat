@@ -59,10 +59,10 @@ public class ChatDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (friendSelected!=null){
             if(currentMessage.getUserReceiverId() == friendSelected.getId()){
                 isFriendReceiveMessage = true;
-                return 1;
+                return 2;
             } else if (currentMessage.getUserSenderId() == friendSelected.getId()){
                 isFriendSentMessage= true;
-                return 2;
+                return 1;
             }
         }
         return output;
@@ -102,7 +102,7 @@ public class ChatDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case 2:
                 SentMessageHolder sentMessageHolder = (SentMessageHolder) holder;
                 sentMessageHolder.binding.message.setText(String.valueOf(listMessage.get(position).getMessage()));
-                sentMessageHolder.binding.username.setText(String.valueOf(friendSelected.getUsername()));
+                sentMessageHolder.binding.username.setText("Me");
                 break;
         }
 
@@ -110,7 +110,10 @@ public class ChatDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return listMessage.size();
+        if(listMessage!=null){
+            return listMessage.size();
+        }
+        return 0;
     }
 
     public interface OnItemClickListener {

@@ -31,12 +31,11 @@ public class FriendRepository {
     public void deleteAllFriends(){
         new DeleteAllFriendAsyncTask(friendDao).execute();
     }
-
     public LiveData<List<Friend>> getAllFriends(){
         return allFriends ;
     }
 
-    // room didn't allow running on bg
+    // room didn't allow running on main thread
     private static class InsertFriendAsyncTask extends AsyncTask<Friend, Void, Void> {
         private FriendDao friendDao;
         private InsertFriendAsyncTask(FriendDao friendDao){
@@ -86,5 +85,8 @@ public class FriendRepository {
 
     }
 
-
 }
+
+
+
+

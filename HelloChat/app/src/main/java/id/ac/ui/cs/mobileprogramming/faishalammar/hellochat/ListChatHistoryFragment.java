@@ -1,9 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -68,7 +72,7 @@ public class ListChatHistoryFragment extends Fragment {
             if(!networkStatus.isConnected(context)){
                 Toast.makeText(context, "Unstable Connection. Please Check Your Connection and Try Again", Toast.LENGTH_LONG).show();
             } else {
-                if(MainActivity.isTablet(getContext())){
+                if(MainActivity.isLandscape(getContext())){
                     friendViewModel.setSelected(adapter.getItemAt(position));
                     getParentFragmentManager().beginTransaction()
                             .replace(R.id.container_2, chatDetailsFragment)
@@ -88,10 +92,19 @@ public class ListChatHistoryFragment extends Fragment {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getParentFragmentManager().beginTransaction()
-                            .replace(R.id.container, listContactFragment)
-                            .addToBackStack(null)
-                            .commit();
+                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        // Do something ...
+                        getParentFragmentManager().beginTransaction()
+                                .replace(R.id.container, listContactFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{Manifest.permission.READ_CONTACTS},
+                                1);
+                    }
+
                 }
             }
         );

@@ -84,6 +84,7 @@ public class ListContactFragment extends Fragment {
         return nameList;
     }
 
+
 }
 
 
