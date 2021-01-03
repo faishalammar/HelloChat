@@ -2,13 +2,14 @@ package id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.message;
 
 import android.app.Application;
 
+import java.io.Serializable;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-public class MessageViewModel extends AndroidViewModel {
+public class MessageViewModel extends AndroidViewModel implements Serializable{
     private MessageRepository repository;
     private LiveData<List<Message>> allMessages;
 

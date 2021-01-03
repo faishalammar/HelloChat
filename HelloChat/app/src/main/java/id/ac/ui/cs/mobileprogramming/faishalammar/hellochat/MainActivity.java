@@ -10,6 +10,7 @@ import android.os.Bundle;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user.User;
@@ -17,7 +18,6 @@ import id.ac.ui.cs.mobileprogramming.faishalammar.hellochat.user.UserViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private ListChatHistoryFragment listChatHistoryFragment = new ListChatHistoryFragment();
     private ChatDetailsFragment chatDetailsFragment = new ChatDetailsFragment();
     private NetworkStatus networkStatus;
@@ -27,12 +27,18 @@ public class MainActivity extends AppCompatActivity {
     {
         return contextOfApplication;
     }
+    public static NotificationManagerCompat notificationManager;
+    public static NotificationManagerCompat getNotificationManager()
+    {
+        return notificationManager;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        notificationManager = NotificationManagerCompat.from(this);
         networkReceiver = new NetworkConnectionReceiver();
         contextOfApplication = getApplicationContext();
 
@@ -63,18 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean isLandscape(Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
-
-
-    public static boolean isPhoneAndLandscape(Context context){
-        int screenLayout = context.getResources().getConfiguration().screenLayout;
-        int screenOrientation = context.getResources().getConfiguration().orientation;
-
-        return (screenLayout >= Configuration.SCREENLAYOUT_SIZE_SMALL & 
-                screenLayout <= Configuration.SCREENLAYOUT_SIZE_LARGE & 
-                screenOrientation == Configuration.ORIENTATION_LANDSCAPE);
-            
     }
 
 }
